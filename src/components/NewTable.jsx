@@ -114,6 +114,7 @@ TablePaginationActions.propTypes = {
 const PostList = () => {
     const [data, setData] = useState(null);
     const [control, setControl] = useState();
+    const [length, setLength] = useState(0);
     const navigate = useNavigate();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -141,6 +142,8 @@ const PostList = () => {
     useEffect(() => {
         fetchData();
         setControl(data);
+        // console.log(data.length);
+        // setLength(data.length);
         console.log(data);
     }, []);
 
@@ -200,7 +203,7 @@ const PostList = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell width="8%">순위</TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                             과목명
                             <StyledIconButton
                                 sx={{ padding: 0.1 }}
@@ -239,7 +242,7 @@ const PostList = () => {
                                 <ArrowCircleDownIcon fontSize="small" />
                             </StyledIconButton>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                             교과구분
                             <StyledIconButton
                                 sx={{ padding: 0.1 }}
@@ -256,7 +259,7 @@ const PostList = () => {
                                 <ArrowCircleDownIcon fontSize="small" />
                             </StyledIconButton>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                             교수님
                             <StyledIconButton
                                 sx={{ padding: 0.1 }}
@@ -273,7 +276,7 @@ const PostList = () => {
                                 <ArrowCircleDownIcon fontSize="small" />
                             </StyledIconButton>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                             수업시간
                             <StyledIconButton
                                 sx={{ padding: 0.1 }}
@@ -300,7 +303,7 @@ const PostList = () => {
                             : control
                         ).map((item, index) => (
                             <TableRow
-                                key={index}
+                                key={index + page * rowsPerPage}
                                 sx={{
                                     '&:last-child td, &:last-child th': {
                                         border: 0,
@@ -322,7 +325,9 @@ const PostList = () => {
                                 <TableCell align="center">
                                     {item.professor}
                                 </TableCell>
-                                <TableCell>{item.real_time}</TableCell>
+                                <TableCell align="center">
+                                    {item.real_time}
+                                </TableCell>
                             </TableRow>
                         ))}
                     {emptyRows > 0 && (
@@ -335,11 +340,14 @@ const PostList = () => {
                     <TableRow>
                         <TablePagination
                             rowsPerPageOptions={[
+                                5,
+                                10,
                                 20,
+                                25,
                                 { label: 'All', value: -1 },
                             ]}
                             colSpan={3}
-                            count={control.length}
+                            count={length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             SelectProps={{
