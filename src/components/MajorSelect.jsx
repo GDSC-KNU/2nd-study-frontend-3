@@ -8,14 +8,12 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Select from '@mui/material/Select';
 import major from './major.json';
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import FormGroup from '@mui/material/FormGroup';
 // import Switch from '@mui/material/Switch';
@@ -71,13 +69,6 @@ export default function MajorSelect(props) {
             setOpen(false);
         }
     };
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
 
     const handleCategory = (event) => {
         setValue(event.target.value);

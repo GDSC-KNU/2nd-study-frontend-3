@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Table from '@mui/material/Table';
@@ -22,8 +22,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
-import { Stack, Box } from '@mui/material';
-import useDetail from '../hooks/useDeatil';
+import { Box } from '@mui/material';
 
 const StyledIconButton = styled(IconButton)`
     padding: 0;

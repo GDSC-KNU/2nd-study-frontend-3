@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Table from '@mui/material/Table';
@@ -22,8 +22,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
-import { Stack, Box } from '@mui/material';
-import useDetail from '../hooks/useDeatil';
+import { Box } from '@mui/material';
 
 const StyledIconButton = styled(IconButton)`
     padding: 0;
@@ -117,15 +116,10 @@ TablePaginationActions.propTypes = {
 
 const CategoryTable = ({ category, semester }) => {
     const [data, setData] = useState(null);
-    const [temp, setTemp] = useState(null);
     const [control, setControl] = useState();
     const [length, setLength] = useState(0);
-    const { setDetail } = useDetail();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [url, setUrl] = useState('');
-    const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
 
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;

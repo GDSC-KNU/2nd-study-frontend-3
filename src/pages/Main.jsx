@@ -3,7 +3,6 @@ import NewTable from '../components/NewTable';
 import MajorSelect from '../components/MajorSelect';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { BookOutlined } from '@ant-design/icons';
 import CategoryTable from '../components/CategoryTable';
 import ProfessorTable from '../components/ProfessorTable';
 import Typography from '@mui/material/Typography';

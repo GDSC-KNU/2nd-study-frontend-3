@@ -9,13 +9,13 @@ import {
     UserOutlined,
     DesktopOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu } from 'antd';
 import { useState, useEffect } from 'react';
 import { grey } from '@mui/material/colors';
 import Info from './pages/Info';
 import { useNavigate } from 'react-router-dom';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
     return {
