@@ -139,7 +139,7 @@ const NewTable = ({ major, semester }) => {
     };
     const fetchData = async () => {
         const { data } = await axios.get(
-            'http://34.136.161.213:8080/popular-major?',
+            'https://honeyclass.kro.kr/popular-major?',
             {
                 params: {
                     major: major,

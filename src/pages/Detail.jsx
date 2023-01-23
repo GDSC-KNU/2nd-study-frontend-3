@@ -31,9 +31,11 @@ const Detail = () => {
     const [favor, setFavor] = useState(0);
     const [number, setNumber] = useState(0);
     const fetchData = async () => {
-        const { data } = await axios.get(
-            'http://34.136.161.213:8080/review?id=20221COME0331003'
-        );
+        const { data } = await axios.get('https://honeyclass.kro.kr/review?', {
+            params: {
+                id: location.state.lecture_id,
+            },
+        });
         setFavor(data[0].favor);
         setNumber(data[0].review_number);
         setData(data);

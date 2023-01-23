@@ -136,7 +136,7 @@ const ProfessorTable = ({ professor, semester }) => {
     const fetchData = async () => {
         console.log(professor);
         const { data } = await axios.get(
-            'http://34.136.161.213:8080/professor-lecture?',
+            'https://honeyclass.kro.kr/professor-lecture?',
             {
                 params: {
                     professor: professor,
