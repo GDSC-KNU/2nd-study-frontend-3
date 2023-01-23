@@ -114,12 +114,12 @@ const Detail = () => {
                     </Space>
                 </Contents>
 
-                <Divider orientation="left">
+                {/* <Divider orientation="left">
                     <CommentOutlined /> 리뷰
                 </Divider>
                 <Space direction="vertical">
                     <div>review</div>
-                </Space>
+                </Space> */}
             </StyledCard>
         </Wrap>
     );
