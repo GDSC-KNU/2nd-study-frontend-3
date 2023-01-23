@@ -139,7 +139,6 @@ const NewTable = ({ major, semester }) => {
         setPage(0);
     };
     const fetchData = async () => {
-        console.log(major);
         const { data } = await axios.get(
             'http://34.136.161.213:8080/popular-major?',
             {

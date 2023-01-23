@@ -37,7 +37,6 @@ const Detail = () => {
         setFavor(data[0].favor);
         setNumber(data[0].review_number);
         setData(data);
-        console.log(data);
     };
     useEffect(() => {
         fetchData();

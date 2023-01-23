@@ -126,10 +126,7 @@ const CategoryTable = ({ category, semester }) => {
     const [url, setUrl] = useState('');
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
-    // const LoadDetail = (index) => {
-    //     navigate('/detail/' + data[index]);
-    // };
-    // Avoid a layout jump when reaching the last page with empty rows.
+
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
@@ -142,7 +139,6 @@ const CategoryTable = ({ category, semester }) => {
         setPage(0);
     };
     const fetchData = async () => {
-        // const { data } = await axios.get('http://localhost:8080/major');
         const { data } = await axios.get(
             'http://34.136.161.213:8080/category?',
             {
