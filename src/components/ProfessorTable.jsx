@@ -115,16 +115,17 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-const NewTable = ({ major, semester }) => {
+const ProfessorTable = ({ professor, semester }) => {
     const [data, setData] = useState(null);
-    // const [temp, setTemp] = useState(null);
+    const [temp, setTemp] = useState(null);
     const [control, setControl] = useState();
     const [length, setLength] = useState(0);
-    // const { setDetail } = useDetail();
+    const { setDetail } = useDetail();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    // const [url, setUrl] = useState('');
-    // const [open, setOpen] = useState(false);
+    const [url, setUrl] = useState('');
+    const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -139,12 +140,12 @@ const NewTable = ({ major, semester }) => {
         setPage(0);
     };
     const fetchData = async () => {
-        console.log(major);
+        console.log(professor);
         const { data } = await axios.get(
-            'http://34.136.161.213:8080/popular-major?',
+            'http://34.136.161.213:8080/professor-lecture?',
             {
                 params: {
-                    major: major,
+                    professor: professor,
                     semester: semester,
                 },
             }
@@ -154,11 +155,14 @@ const NewTable = ({ major, semester }) => {
         setControl(data);
     };
     useEffect(() => {
-        if (typeof major !== 'undefined' && typeof semester !== 'undefined') {
+        if (
+            typeof professor !== 'undefined' &&
+            typeof semester !== 'undefined'
+        ) {
             fetchData();
             setControl(data);
         }
-    }, [major, semester]);
+    }, [professor, semester]);
 
     const ResetData = () => {
         setControl(data);
@@ -205,6 +209,11 @@ const NewTable = ({ major, semester }) => {
             <br />
             <br />
 
+            <Stack
+                alignItems="right"
+                justifyContent="center"
+                spacing={2}
+            ></Stack>
             <Table
                 size="small"
                 sx={{ minWidth: 650 }}
@@ -238,6 +247,11 @@ const NewTable = ({ major, semester }) => {
                             >
                                 <ArrowCircleDownIcon fontSize="small" />
                             </StyledIconButton>
+                            {/* <Chip label="" onClick={RecentTimeOrder} />
+                            <Chip
+                                label="오래된 순 정렬"
+                                onClick={OldTimeOrder}
+                            /> */}
                         </TableCell>
                         <TableCell width="20%" align="center">
                             과목코드
@@ -318,11 +332,17 @@ const NewTable = ({ major, semester }) => {
                                     component="th"
                                     scope="row"
                                 >
+                                    {/* <Link onClick={handleClickOpen}>
+                                        {index + 1 + page * rowsPerPage}
+                                    </Link> */}
                                     <Link
                                         to="/detail"
                                         state={data[index + page * rowsPerPage]}
                                     >
-                                        <Button variant="text">
+                                        <Button
+                                            variant="text"
+                                            // onClick={LoadDetail(index)}
+                                        >
                                             {index + 1 + page * rowsPerPage}
                                         </Button>
                                     </Link>
@@ -382,4 +402,4 @@ const NewTable = ({ major, semester }) => {
     );
 };
 
-export default NewTable;
+export default ProfessorTable;

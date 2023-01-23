@@ -3,152 +3,144 @@ import { CarryOutOutlined, CommentOutlined } from '@ant-design/icons';
 import { Badge, Divider, Space } from 'antd';
 import { Tag } from 'antd';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Detail = () => {
+    const location = useLocation();
     const colors = [
-        'year 과목년도',
-        'semester 학기',
-        'grade 수강 학년',
-        'college 수업 소속 대학 V',
-        'major 학과(학부) ',
-        'credit 학점',
-        'lecture_credit 이론 인정 학점',
-        'prac_credit 실습 인정 학점',
-        'professor 교수님 성함 ',
-        'school_time 학교 시간표 기준 수업시간',
-        'real_time 실제 수업 시간',
-        'building 강의 건물',
-        'room 강의실',
-        'total 총원',
-        'sugang 수강 신청 한 인원',
-        'sugangpack 수강 꾸러미 담은 인원',
+        '수업년도 : ' + location.state.year + '년',
+        '수업학기 : ' + location.state.semester + '학기',
+        '수강 학년 : ' + location.state.grade + '학년',
+        '소속 대학 : ' + location.state.college,
+        '학과 : ' + location.state.major,
+        '학점 : ' + location.state.credit,
+        '이론 인정 학점 : ' + location.state.lecture_credit + '학점',
+        '실습 인정 학점 : ' + location.state.prac_credit + '학점',
+        '교수님 성함 : ' + location.state.professor + '교수님',
+        '학교 시간표 : ' + location.state.school_time,
+        '수업 시간 : ' + location.state.real_time,
+        '강의 건물 : ' + location.state.building,
+        '강의실 : ' + location.state.room,
+        '총원 : ' + location.state.total + '명',
+        '수강 신청 총원 : ' + location.state.sugang + '명',
+        '수강 꾸러미 총원 : ' + location.state.sugangpack + '명',
     ];
-
+    const [data, setData] = useState(null);
+    const [favor, setFavor] = useState(0);
+    const [number, setNumber] = useState(0);
+    const fetchData = async () => {
+        const { data } = await axios.get(
+            'http://34.136.161.213:8080/review?id=20221COME0331003'
+        );
+        setFavor(data[0].favor);
+        setNumber(data[0].review_number);
+        setData(data);
+        console.log(data);
+    };
+    useEffect(() => {
+        fetchData();
+    }, []);
     return (
-        <>
-            <YellowBack>
-                <Wrap className="site-card-border-less-wrapper">
-                    <Card bordered={false}>
-                        <Header>
-                            <h1>동역학</h1>
-                            <h5>CRTR23423</h5>
-                        </Header>
+        <Wrap className="site-card-border-less-wrapper">
+            <StyledCard bordered={false}>
+                <Header>
+                    <h1>{location.state.name}</h1>
+                    <h5>{location.state.number}</h5>
+                </Header>
+                <Divider orientation="left">
+                    <CarryOutOutlined /> 인기도
+                </Divider>
 
-                        <Divider orientation="left">
-                            {' '}
-                            <CarryOutOutlined /> 인기도
-                        </Divider>
+                <Popularity>
+                    <div className="site-card-wrapper">
+                        <Row gutter={16}>
+                            <Col span={8}>
+                                <Card
+                                    title="수꾸/수강신청인원"
+                                    bordered={false}
+                                >
+                                    {Math.round(
+                                        (location.state.sugangpack /
+                                            location.state.sugang) *
+                                            100
+                                    )}
+                                    %
+                                </Card>
+                            </Col>
 
-                        <Popularity>
-                            <div className="site-card-wrapper">
-                                <Row gutter={16}>
-                                    <Col span={8}>
-                                        <Card
-                                            title="Sugangpack/sugang"
-                                            bordered={false}
-                                        >
-                                            150%
-                                        </Card>
-                                    </Col>
+                            <Col span={8}>
+                                <Card title="수꾸/총원" bordered={false}>
+                                    {Math.round(
+                                        (location.state.sugangpack /
+                                            location.state.total) *
+                                            100
+                                    )}
+                                    %
+                                </Card>
+                            </Col>
 
-                                    <Col span={8}>
-                                        <Card
-                                            title="Sugangpack/total"
-                                            bordered={false}
-                                        >
-                                            190%
-                                        </Card>
-                                    </Col>
+                            <Col span={8}>
+                                <Card title="강의평가" bordered={false}>
+                                    상위 {Math.round(100 - favor * 100)}% (
+                                    {number}명 평가)
+                                </Card>
+                            </Col>
+                        </Row>
+                    </div>
+                </Popularity>
 
-                                    <Col span={8}>
-                                        <Card title="favor" bordered={false}>
-                                            30%
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </Popularity>
+                <Divider orientation="left">
+                    <CarryOutOutlined /> 기본정보
+                </Divider>
+                <HashTag>
+                    <Tag color="magenta">{location.state.professor}</Tag>
+                    <Tag color="red">{location.state.major}</Tag>
+                    <Tag color="volcano">{location.state.type}</Tag>
+                    <Tag color="orange">{location.state.information}</Tag>
+                </HashTag>
 
-                        <Divider orientation="left">
-                            {' '}
-                            <CarryOutOutlined /> 기본정보
-                        </Divider>
-                        <HashTag>
-                            <Tag color="magenta">교수님</Tag>
-                            <Tag color="red">학부(대학)</Tag>
-                            <Tag color="volcano">type</Tag>
-                            <Tag color="orange">information</Tag>
-                            {/* <Tag color="gold">gold</Tag>
-      <Tag color="lime">lime</Tag>
-      <Tag color="green">green</Tag>
-      <Tag color="cyan">cyan</Tag>
-      <Tag color="blue">blue</Tag>
-      <Tag color="geekblue">geekblue</Tag>
-      <Tag color="purple">purple</Tag> */}
-                        </HashTag>
+                <Divider orientation="left">
+                    <CarryOutOutlined /> 세부 수업 관련 정보
+                </Divider>
 
-                        <Divider orientation="left">
-                            {' '}
-                            <CarryOutOutlined /> 세부 수업 관련 정보
-                        </Divider>
+                <Contents>
+                    <Space direction="vertical">
+                        {colors.map((colors) => (
+                            <Badge key={colors} color={colors} text={colors} />
+                        ))}
+                    </Space>
+                </Contents>
 
-                        <Contents>
-                            <Space direction="vertical">
-                                {colors.map((colors) => (
-                                    <Badge
-                                        key={colors}
-                                        color={colors}
-                                        text={colors}
-                                    />
-                                ))}
-                            </Space>
-                        </Contents>
-
-                        <Divider orientation="left">
-                            <CommentOutlined /> 리뷰
-                        </Divider>
-                        <Space direction="vertical">
-                            <div>review</div>
-                        </Space>
-                        {/* <Row style={{padding : 60}}>
-        <Col span={12}></Col>
-        <Col span={12}>배종현</Col>
-        </Row>
-        <Row style={{padding : 30}}>
-        <Col span={12}>공대 4호관</Col>
-        <Col span={12}>303호</Col>
-        </Row>
-        <Row style={{padding : 30}}>
-        <Col span={24}>월 13:00 - 16:00
-        월 13:00 - 16:00
-        월 13:00 - 16:00
-        </Col>
-        </Row>
-        <Row style={{padding : 30}}>
-        <Col span={12}>이론학점 : 3</Col>
-        <Col span={12}>실습학점 : 3</Col>
-        </Row> */}
-                        <footer></footer>
-                    </Card>
-                </Wrap>
-            </YellowBack>
-        </>
+                <Divider orientation="left">
+                    <CommentOutlined /> 리뷰
+                </Divider>
+                <Space direction="vertical">
+                    <div>review</div>
+                </Space>
+            </StyledCard>
+        </Wrap>
     );
 };
 
-const YellowBack = styled.div``;
-
 const Wrap = styled.div`
-        position: relative;
-        margin: 20px;
-        width : 75%
-        display : flex;
-        justify-content: center;
-        align-items: center;
-    `;
+    position: relative;
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Card {
+        max-width: 100%;
+    }
+`;
 
 const Header = styled.div`
     display: flex;
+`;
+const StyledCard = styled(Card)`
+    width: 80%;
 `;
 
 const Popularity = styled.div`
@@ -159,7 +151,7 @@ const Popularity = styled.div`
 const HashTag = styled.div`
     margin-top: 25px;
     margin-bottom: 25px;
-    margin-left: 100px;
+    margin-left: 25px;
 `;
 
 const Contents = styled.div`

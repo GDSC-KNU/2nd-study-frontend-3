@@ -1,0 +1,36 @@
+.Main{
+  
+}
+.cardContainer1{
+    display: flex;
+    justify-content: center;
+    height: 10rem;
+  }
+
+  .cardContainer2{
+    display: flex;
+    justify-content: center;
+  }
+
+  .textcard1{
+    width: 12rem;
+  }
+
+  .textcard2{
+    width: 10rem;
+    height: 12rem;
+  }
+
+  .project{
+    font-size: 80px;
+    height: 70px;
+  }
+
+  .cardname{
+    font-size: 30px;
+    height: 20px;
+  }
+
+  .card{
+    font-size: 18px;
+  }
