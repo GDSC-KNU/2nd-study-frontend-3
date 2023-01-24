@@ -28,26 +28,37 @@ const Detail = () => {
         '수강 신청 총원 : ' + location.state.sugang + '명',
         '수강 꾸러미 총원 : ' + location.state.sugangpack + '명',
     ];
-    const [data, setData] = useState(null);
-    const [favor, setFavor] = useState(null);
-    const [number, setNumber] = useState(null);
-
+    const [review, setReview] = useState([]);
+    const [number, setNumber] = useState(0);
+    const [favor, setFavor] = useState(0);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const fetchData = async () => {
-        const { data } = await axios.get('https://honeyclass.kro.kr/review?', {
-            params: {
-                id: location.state.lecture_id,
-            },
-        });
-        setData(data[0]);
+        setLoading(true);
+        try {
+            const { data } = await axios.get(
+                'https://honeyclass.kro.kr/review?',
+                {
+                    params: {
+                        id: location.state.lecture_id,
+                    },
+                }
+            );
+            setLoading(false);
+            setReview(data[0]);
+        } catch (err) {
+            console.log(err);
+        }
     };
     useEffect(() => {
         fetchData();
-        if (data !== null) {
-            setNumber(data.number);
-            setFavor(data.favor);
-        }
-    }, [data.number, data.favor]);
+        setFavor(review.favor);
+        setNumber(review.review_number);
+        // console.log(typeof data);
+        // setNumber(data.number);
+        // setFavor(data.favor);
+    }, [review]);
+
     return (
         <Wrap className="site-card-border-less-wrapper">
             <StyledCard bordered={false}>
