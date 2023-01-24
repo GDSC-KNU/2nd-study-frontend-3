@@ -3,9 +3,10 @@ import { CarryOutOutlined, CommentOutlined } from '@ant-design/icons';
 import { Badge, Divider, Space } from 'antd';
 import { Tag } from 'antd';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Button } from '@mui/material';
 
 const Detail = () => {
     const location = useLocation();
@@ -28,21 +29,25 @@ const Detail = () => {
         '수강 꾸러미 총원 : ' + location.state.sugangpack + '명',
     ];
     const [data, setData] = useState(null);
-    const [favor, setFavor] = useState(0);
-    const [number, setNumber] = useState(0);
+    const [favor, setFavor] = useState(null);
+    const [number, setNumber] = useState(null);
+
+    const navigate = useNavigate();
     const fetchData = async () => {
         const { data } = await axios.get('https://honeyclass.kro.kr/review?', {
             params: {
                 id: location.state.lecture_id,
             },
         });
-        setFavor(data[0].favor);
-        setNumber(data[0].review_number);
-        setData(data);
+        setData(data[0]);
     };
     useEffect(() => {
         fetchData();
-    }, []);
+        if (data !== null) {
+            setNumber(data.number);
+            setFavor(data.favor);
+        }
+    }, [data.number, data.favor]);
     return (
         <Wrap className="site-card-border-less-wrapper">
             <StyledCard bordered={false}>
@@ -53,7 +58,6 @@ const Detail = () => {
                 <Divider orientation="left">
                     <CarryOutOutlined /> 인기도
                 </Divider>
-
                 <Popularity>
                     <div className="site-card-wrapper">
                         <Row gutter={16}>

@@ -310,6 +310,9 @@ const NewTable = ({ major, semester }) => {
                                     },
                                     height: '35px',
                                 }}
+                                // component={Link}
+                                // to="/detail"
+                                // state={data[index + page * rowsPerPage]}
                             >
                                 <TableCell
                                     height="50px"
@@ -320,7 +323,13 @@ const NewTable = ({ major, semester }) => {
                                         to="/detail"
                                         state={data[index + page * rowsPerPage]}
                                     >
-                                        <Button variant="text">
+                                        <Button
+                                            variant="contained"
+                                            sx={{
+                                                fontWeight: 'bolder',
+                                                borderRadius: 2,
+                                            }}
+                                        >
                                             {index + 1 + page * rowsPerPage}
                                         </Button>
                                     </Link>

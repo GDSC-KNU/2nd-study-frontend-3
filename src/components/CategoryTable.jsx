@@ -312,12 +312,11 @@ const CategoryTable = ({ category, semester }) => {
                                     },
                                     height: '35px',
                                 }}
+                                // component={Link}
+                                // to="/detail"
+                                // state={data[index + page * rowsPerPage]}
                             >
-                                <TableCell
-                                    height="50px"
-                                    component="th"
-                                    scope="row"
-                                >
+                                <TableCell height="50px" scope="row">
                                     {/* <Link onClick={handleClickOpen}>
                                         {index + 1 + page * rowsPerPage}
                                     </Link> */}
@@ -326,7 +325,11 @@ const CategoryTable = ({ category, semester }) => {
                                         state={data[index + page * rowsPerPage]}
                                     >
                                         <Button
-                                            variant="text"
+                                            variant="contained"
+                                            sx={{
+                                                fontWeight: 'bolder',
+                                                borderRadius: 2,
+                                            }}
                                             // onClick={LoadDetail(index)}
                                         >
                                             {index + 1 + page * rowsPerPage}

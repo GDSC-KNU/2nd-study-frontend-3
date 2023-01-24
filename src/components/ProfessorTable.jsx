@@ -334,7 +334,11 @@ const ProfessorTable = ({ professor, semester }) => {
                                         state={data[index + page * rowsPerPage]}
                                     >
                                         <Button
-                                            variant="text"
+                                            variant="contained"
+                                            sx={{
+                                                fontWeight: 'bolder',
+                                                borderRadius: 2,
+                                            }}
                                             // onClick={LoadDetail(index)}
                                         >
                                             {index + 1 + page * rowsPerPage}
