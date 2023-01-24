@@ -19,7 +19,7 @@ const Detail = () => {
         '학점 : ' + location.state.credit,
         '이론 인정 학점 : ' + location.state.lecture_credit + '학점',
         '실습 인정 학점 : ' + location.state.prac_credit + '학점',
-        '교수님 성함 : ' + location.state.professor + '교수님',
+        '교수님 성함 : ' + location.state.professor,
         '학교 시간표 : ' + location.state.school_time,
         '수업 시간 : ' + location.state.real_time,
         '강의 건물 : ' + location.state.building,
