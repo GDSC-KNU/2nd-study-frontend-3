@@ -52,8 +52,15 @@ const Detail = () => {
     };
     useEffect(() => {
         fetchData();
-        setFavor(review.favor);
-        setNumber(review.review_number);
+        console.log(review);
+        console.log(typeof review);
+        if (typeof review === 'undefined') {
+            setFavor(0);
+            setNumber(0);
+        } else {
+            setFavor(review.favor);
+            setNumber(review.review_number);
+        }
         // console.log(typeof data);
         // setNumber(data.number);
         // setFavor(data.favor);
