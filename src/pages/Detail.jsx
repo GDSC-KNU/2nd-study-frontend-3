@@ -52,8 +52,6 @@ const Detail = () => {
     };
     useEffect(() => {
         fetchData();
-        console.log(review);
-        console.log(typeof review);
         if (typeof review === 'undefined') {
             setFavor(0);
             setNumber(0);
