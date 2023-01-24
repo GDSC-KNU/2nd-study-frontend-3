@@ -82,7 +82,8 @@ const Detail = () => {
                                             location.state.sugang) *
                                             100
                                     )}
-                                    %
+                                    % ({location.state.sugangpack}명/
+                                    {location.state.sugang}명)
                                 </Card>
                             </Col>
 
@@ -93,7 +94,8 @@ const Detail = () => {
                                             location.state.total) *
                                             100
                                     )}
-                                    %
+                                    % ({location.state.sugangpack}명/
+                                    {location.state.total}명)
                                 </Card>
                             </Col>
 
