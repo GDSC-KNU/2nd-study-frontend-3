@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import NewTable from '../components/NewTable';
 import MajorSelect from '../components/MajorSelect';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import CategoryTable from '../components/CategoryTable';
 import ProfessorTable from '../components/ProfessorTable';
 import Typography from '@mui/material/Typography';
@@ -20,7 +20,9 @@ const Wrapper = styled.div`
 // const { Title } = Typography;
 
 const Main = (props) => {
+    const location = useLocation();
     const [major, setMajor] = useState('');
+    const [depart, setDepart] = useState('');
     const { current } = useParams();
     const [category, setCategory] = useState();
     const [professor, setProfessor] = useState();
@@ -30,6 +32,13 @@ const Main = (props) => {
             setMajor('');
         }
     }, [current]);
+    const fetchValue = () => {
+        setDepart(location.state.depart);
+        setMajor(location.state.major);
+    };
+    // useEffect(() => {
+    //     if(location.state.depart !==null)fetchValue();
+    // }, [location.state.depart]);
     return (
         <Wrapper>
             <Typography
@@ -48,10 +57,11 @@ const Main = (props) => {
                 setCategory={setCategory}
                 setProfessor={setProfessor}
                 setSemester={setSemester}
+                setDepart={setDepart}
             />
             {/* <RadioTable /> */}
             {current === '학과별 순위' && (
-                <NewTable major={major} semester={semester} />
+                <NewTable depart={depart} major={major} semester={semester} />
             )}
             {current === '카테고리별 순위' && (
                 <CategoryTable category={category} semester={semester} />

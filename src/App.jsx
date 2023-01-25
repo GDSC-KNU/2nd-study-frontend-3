@@ -47,7 +47,6 @@ const App = () => {
             LoadPage(items[e.key - 1].label);
         }
     };
-    useEffect(() => {}, [key]);
     return (
         <Layout
             style={{
@@ -94,7 +93,10 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Info />} />
                         <Route path="/:current" element={<Main />} />
-                        <Route path="/detail" element={<Detail />} />
+                        <Route
+                            path="/detail/:lecture_id"
+                            element={<Detail />}
+                        />
                     </Routes>
                 </Content>
                 <Footer

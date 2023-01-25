@@ -51,6 +51,7 @@ export default function MajorSelect(props) {
 
     const handleChange = (event) => {
         setDepart(event.target.value || '');
+        props.setDepart(event.target.value);
     };
     const handleMajorChange = (event) => {
         setNowMajor(event.target.value || '');

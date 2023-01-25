@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Table from '@mui/material/Table';
@@ -114,7 +114,7 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-const NewTable = ({ major, semester }) => {
+const NewTable = ({ depart, major, semester }) => {
     const [data, setData] = useState(null);
     // const [temp, setTemp] = useState(null);
     const [control, setControl] = useState();
@@ -124,7 +124,17 @@ const NewTable = ({ major, semester }) => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // const [url, setUrl] = useState('');
     // const [open, setOpen] = useState(false);
-
+    const navigate = useNavigate();
+    const LoadDetail = (index, lecture_id) => {
+        navigate('/detail/' + lecture_id, {
+            state: {
+                data: data[index],
+                back: '학과별 순위',
+                depart: depart,
+                major: major,
+            },
+        });
+    };
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
@@ -162,9 +172,9 @@ const NewTable = ({ major, semester }) => {
         setControl(data);
     };
     const OldOrder = (index, e) => {
-        console.log(control);
-        console.log('e' + e);
-        console.log('name' + index);
+        // console.log(control);
+        // console.log('e' + e);
+        // console.log('name' + index);
         setControl(
             [...data].sort(function (a, b) {
                 const x = b[index];
@@ -178,10 +188,10 @@ const NewTable = ({ major, semester }) => {
                 return 0;
             })
         );
-        console.log(control);
+        // console.log(control);
     };
     const RecentOrder = (index, e) => {
-        console.log(control);
+        // console.log(control);
         setControl(
             [...data].sort(function (b, a) {
                 const x = b[index];
@@ -195,7 +205,7 @@ const NewTable = ({ major, semester }) => {
                 return 0;
             })
         );
-        console.log(control);
+        // console.log(control);
     };
 
     return (
@@ -319,20 +329,37 @@ const NewTable = ({ major, semester }) => {
                                     component="th"
                                     scope="row"
                                 >
-                                    <Link
+                                    {/* <Link
                                         to="/detail"
                                         state={data[index + page * rowsPerPage]}
+                                    > */}
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            fontWeight: 'bolder',
+                                            borderRadius: 2,
+                                        }}
+                                        // onClick={(e) =>
+
+                                        //     navigate('/detail', {
+                                        //         state: {
+                                        //             data: data[
+                                        //                 index +
+                                        //                     page * rowsPerPage
+                                        //             ],
+                                        //         },
+                                        //     })
+                                        // }
+                                        onClick={(e) =>
+                                            LoadDetail(
+                                                index + page * rowsPerPage,
+                                                item.lecture_id
+                                            )
+                                        }
                                     >
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                fontWeight: 'bolder',
-                                                borderRadius: 2,
-                                            }}
-                                        >
-                                            {index + 1 + page * rowsPerPage}
-                                        </Button>
-                                    </Link>
+                                        {index + 1 + page * rowsPerPage}
+                                    </Button>
+                                    {/* </Link> */}
                                 </TableCell>
                                 <TableCell align="center">
                                     {item.name}

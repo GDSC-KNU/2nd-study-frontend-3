@@ -160,9 +160,9 @@ const CategoryTable = ({ category, semester }) => {
         setControl(data);
     };
     const OldOrder = (index, e) => {
-        console.log(control);
-        console.log('e' + e);
-        console.log('name' + index);
+        // console.log(control);
+        // console.log('e' + e);
+        // console.log('name' + index);
         setControl(
             [...data].sort(function (a, b) {
                 const x = b[index];
@@ -176,10 +176,10 @@ const CategoryTable = ({ category, semester }) => {
                 return 0;
             })
         );
-        console.log(control);
+        // console.log(control);
     };
     const RecentOrder = (index, e) => {
-        console.log(control);
+        // console.log(control);
         setControl(
             [...data].sort(function (b, a) {
                 const x = b[index];
@@ -193,7 +193,7 @@ const CategoryTable = ({ category, semester }) => {
                 return 0;
             })
         );
-        console.log(control);
+        // console.log(control);
     };
 
     return (

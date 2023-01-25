@@ -4,17 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { DetailProvider } from './hooks/DetailContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <DetailProvider>
-                <Routes>
-                    <Route path="/*" element={<App />} />
-                </Routes>
-            </DetailProvider>
+            <Routes>
+                <Route path="/*" element={<App />} />
+            </Routes>
         </BrowserRouter>
     </React.StrictMode>
 );

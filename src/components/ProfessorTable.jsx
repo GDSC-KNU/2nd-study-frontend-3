@@ -134,7 +134,7 @@ const ProfessorTable = ({ professor, semester }) => {
         setPage(0);
     };
     const fetchData = async () => {
-        console.log(professor);
+        // console.log(professor);
         const { data } = await axios.get(
             'https://honeyclass.kro.kr/professor-lecture?',
             {
@@ -162,9 +162,9 @@ const ProfessorTable = ({ professor, semester }) => {
         setControl(data);
     };
     const OldOrder = (index, e) => {
-        console.log(control);
-        console.log('e' + e);
-        console.log('name' + index);
+        // console.log(control);
+        // console.log('e' + e);
+        // console.log('name' + index);
         setControl(
             [...data].sort(function (a, b) {
                 const x = b[index];
@@ -178,10 +178,10 @@ const ProfessorTable = ({ professor, semester }) => {
                 return 0;
             })
         );
-        console.log(control);
+        // console.log(control);
     };
     const RecentOrder = (index, e) => {
-        console.log(control);
+        // console.log(control);
         setControl(
             [...data].sort(function (b, a) {
                 const x = b[index];
@@ -195,7 +195,7 @@ const ProfessorTable = ({ professor, semester }) => {
                 return 0;
             })
         );
-        console.log(control);
+        // console.log(control);
     };
 
     return (
