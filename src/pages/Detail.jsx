@@ -92,7 +92,7 @@ const Detail = () => {
                     <h1>{data.name}</h1>
                     <h5>{data.number}</h5>
                     <Button
-                        sx={{ p: 0, ml: 63, mt: 1.5, mb: 1.5 }}
+                        sx={{ p: 0, ml: 2, mt: 1.5, mb: 1.5 }}
                         variant="outlined"
                         onClick={(e) => LoadBack()}
                     >
