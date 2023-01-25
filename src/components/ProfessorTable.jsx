@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Table from '@mui/material/Table';
@@ -157,7 +157,16 @@ const ProfessorTable = ({ professor, semester }) => {
             setControl(data);
         }
     }, [professor, semester]);
-
+    const navigate = useNavigate();
+    const LoadDetail = (index, lecture_id) => {
+        navigate('/detail/' + lecture_id, {
+            state: {
+                data: data[index],
+                back: '카테고리별 순위',
+                professor: professor,
+            },
+        });
+    };
     const ResetData = () => {
         setControl(data);
     };
@@ -329,21 +338,27 @@ const ProfessorTable = ({ professor, semester }) => {
                                     {/* <Link onClick={handleClickOpen}>
                                         {index + 1 + page * rowsPerPage}
                                     </Link> */}
-                                    <Link
+                                    {/* <Link
                                         to="/detail"
                                         state={data[index + page * rowsPerPage]}
+                                    > */}
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            fontWeight: 'bolder',
+                                            borderRadius: 2,
+                                        }}
+                                        onClick={(e) =>
+                                            LoadDetail(
+                                                index + page * rowsPerPage,
+                                                item.lecture_id
+                                            )
+                                        }
+                                        // onClick={LoadDetail(index)}
                                     >
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                fontWeight: 'bolder',
-                                                borderRadius: 2,
-                                            }}
-                                            // onClick={LoadDetail(index)}
-                                        >
-                                            {index + 1 + page * rowsPerPage}
-                                        </Button>
-                                    </Link>
+                                        {index + 1 + page * rowsPerPage}
+                                    </Button>
+                                    {/* </Link> */}
                                 </TableCell>
                                 <TableCell align="center">
                                     {item.name}
